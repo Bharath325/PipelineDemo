@@ -25,7 +25,7 @@ pipeline {
         }
             steps{
                input("Continue?") 
-               
+               echo "WORKING ON ${GIT_BRANCH}"
             }
 
         }
@@ -34,6 +34,20 @@ pipeline {
              echo "Password is :${secret}"   
             }
         }
+        stage("multiple"){
+            parallel {
+                stage("Unit test"){
+                    echo "IN SIDE UNIT"
+                    
+                }
+			stage('Integration test'){
+			    echo "IN SIDE INTEGRATION"
+			}
+
+            }
+            
+        }
+
 
     }
    post{
@@ -47,9 +61,5 @@ pipeline {
 		success{
 		    echo "Success"
 		}
-
    }
- 
-   
-
 }
