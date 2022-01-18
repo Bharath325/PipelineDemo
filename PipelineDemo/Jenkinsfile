@@ -19,8 +19,9 @@ pipeline {
 
         }
         stage("deploy"){
-            
-           echo "Password is :${secret}"
+            steps{
+             echo "Password is :${secret}"   
+            }
         }
 
     }
