@@ -37,11 +37,18 @@ pipeline {
         stage("multiple"){
             parallel {
                 stage("Unit test"){
-                    echo "IN SIDE UNIT"
+                steps{
+                     echo "IN SIDE UNIT"  
+                }
+
+
                     
                 }
 			stage('Integration test'){
-			    echo "IN SIDE INTEGRATION"
+			  steps{
+                 echo "IN SIDE INTEGRATION"   
+                }
+			    
 			}
 
             }
