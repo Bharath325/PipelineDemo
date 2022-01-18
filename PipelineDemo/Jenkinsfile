@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
     agent any
     environment{
@@ -10,10 +12,23 @@ pipeline {
 	}
 
     stages{
+    
+    	stage("init"){
+    	    steps{
+    	        script{
+    	            gv = load "PipelineDemo/script.groovy"
+    	        }
+
+    	    }
+
+    	}
+
         stage("build"){
             steps{
-                echo 'building app'
-                echo "User is : ${user}"
+                script{
+                    gv.buildApp()
+                }
+
             }      
         }
         stage("test"){
@@ -24,21 +39,30 @@ pipeline {
 
         }
             steps{
-               input("Continue?") 
-               echo "WORKING ON ${GIT_BRANCH}"
+              script{
+                  
+                  gv.TestingApp()
+              }
+
             }
 
         }
         stage("deploy"){
             steps{
-             echo "Password is :${secret}"   
+                script{
+                    gv.DeployingApp()
+                }
+
             }
         }
         stage("multiple"){
             parallel {
                 stage("Unit test"){
                 steps{
-                     echo "IN SIDE UNIT"  
+                     script{
+    				gv.Unit()
+				}
+  
                 }
 
 
@@ -46,7 +70,10 @@ pipeline {
                 }
 			stage('Integration test'){
 			  steps{
-                 echo "IN SIDE INTEGRATION"   
+                   script{
+                      gv.Integration()
+                   }
+
                 }
 			    
 			}
