@@ -6,7 +6,27 @@ pipeline {
                 echo 'building app'
             }      
         }
+        stage("test"){
+            steps{
+               input("Continue?") 
+            }
 
+        }
     }
+   post{
+
+       always {
+           echo"This is executed everything"
+       }
+		failure{    
+		    echo "Failed"
+		}
+		success{
+		    echo "Success"
+		}
+
+   }
+ 
+   
 
 }
