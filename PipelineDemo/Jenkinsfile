@@ -87,7 +87,7 @@ pipeline {
    post{
 
        always {
-           echo"This is executed everything"
+           echo"This is executed everytime"
        }
 		failure{    
 		    echo "Failed"
